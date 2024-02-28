@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import Filter from "../filter/filter";
-import ContactForm from "../form/form";
+import ContactForm from "../form/contactForm";
 import { useDispatch, useSelector } from "react-redux";
 import { selectContacts, selectFilter } from "../../redux/selectors";
 import { setFilter } from "../../redux/contactsSlice";
