@@ -1,16 +1,11 @@
 import { useEffect } from "react";
 
 import Filter from "../filter/filter";
-import ContactForm from "../form/contactForm";
 import { useDispatch, useSelector } from "react-redux";
 import { selectContacts, selectFilter } from "../../redux/selectors";
 import { setFilter } from "../../redux/contactsSlice";
-import {
-  addContacts,
-  deleteContacts,
-  getContacts,
-} from "../../redux/operaction";
-import Contact from "../list/list";
+import { deleteContacts, getContacts } from "../../redux/operaction";
+import Contact from "../list/contact";
 
 const ContactsApp = () => {
   const dispatch = useDispatch();
@@ -20,24 +15,6 @@ const ContactsApp = () => {
   useEffect(() => {
     dispatch(getContacts());
   }, [dispatch]);
-
-  const addContact = ({ name, phone }) => {
-    const newContact = {
-      name,
-      phone,
-    };
-
-    const isContactExist = contacts.some(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (isContactExist) {
-      alert(`${name} is already in contacts.`);
-    } else {
-      console.log(newContact);
-      dispatch(addContacts(newContact));
-    }
-  };
 
   const deleteContact = (contactId) => {
     dispatch(deleteContacts(contactId));
@@ -60,8 +37,6 @@ const ContactsApp = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={addContact} />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={handleChangeFilter} />
       {filteredContacts.map((con) => (
