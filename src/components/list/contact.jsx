@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 const Contact = ({ contact, handleClick }) => {
   return (
     <li key={contact.id}>
@@ -7,6 +8,15 @@ const Contact = ({ contact, handleClick }) => {
       <button onClick={() => handleClick(contact.id)}>Delete</button>
     </li>
   );
+};
+
+Contact.propTypes = {
+  contact: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default Contact;
