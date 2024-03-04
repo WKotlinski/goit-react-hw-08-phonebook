@@ -1,7 +1,24 @@
+import { useSelector } from "react-redux";
 import css from "./userMenu.module.css";
+import { selectEmail, selectName } from "../../redux/selectors";
+import LogoutButton from "./LogoutButton";
+import { useEffect } from "react";
 
 const UserMenu = () => {
-  return <div className={css.container}>{/*placeholder */}</div>;
+  const user = useSelector(selectName);
+  const email = useSelector(selectEmail);
+  useEffect(() => {
+    console.log("User:", user);
+    console.log("Email:", email);
+  }, [user, email]);
+
+  return (
+    <div className={css.container}>
+      <p>{user ? user : "Brak danych"}</p>
+      <p>{email ? email : "Brak danych"}</p>
+      <LogoutButton />
+    </div>
+  );
 };
 
 export default UserMenu;
