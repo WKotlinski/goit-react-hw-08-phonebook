@@ -30,15 +30,15 @@ export const contactsSlice = createSlice({
         state.contacts = actions.payload.map((con) => ({
           id: con.id,
           name: con.name,
-          phone: con.phone,
+          number: con.number,
         }));
       })
       .addCase(addContacts.pending, pending)
       .addCase(addContacts.rejected, rejected)
       .addCase(addContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { name, phone } = action.payload;
-        state.contacts = [...state.contacts, { name, phone }];
+        const { name, number } = action.payload;
+        state.contacts = [...state.contacts, { name, number }];
       })
       .addCase(deleteContacts.pending, pending)
       .addCase(deleteContacts.rejected, rejected)
