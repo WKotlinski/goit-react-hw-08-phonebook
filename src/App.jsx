@@ -1,39 +1,25 @@
-import { Provider, useDispatch, useSelector } from "react-redux";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import ContactsApp from "./components/contacts/contactsApp";
-import store from "./redux/store";
-import ContactForm from "./components/form/contactForm";
-import { selectContacts } from "./redux/selectors";
-import { addContacts } from "./redux/operaction";
+
+import "./App.css";
+import Navigation from "./components/header/navigation/Navigation";
+import HomePage from "./components/header/homepage/homepage";
+import RegistrationSection from "./components/logingSection/registerSection";
+import LoginSection from "./components/logingSection/login";
 
 function App() {
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
-  const addContact = ({ name, phone }) => {
-    const newContact = {
-      name,
-      phone,
-    };
-
-    const isContactExist = contacts.some(
-      (contact) => contact.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (isContactExist) {
-      alert(`${name} is already in contacts.`);
-    } else {
-      console.log(newContact);
-      dispatch(addContacts(newContact));
-    }
-  };
-
   return (
     <>
-      <Provider store={store}>
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={addContact} />
-        <ContactsApp />
-      </Provider>
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="register" element={<RegistrationSection />} />
+          <Route path="/loging" element={<LoginSection />} />
+          <Route path="contactapp" element={<ContactsApp />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
