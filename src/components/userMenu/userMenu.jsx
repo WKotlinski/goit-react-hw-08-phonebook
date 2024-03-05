@@ -7,10 +7,7 @@ import { useEffect } from "react";
 const UserMenu = () => {
   const user = useSelector(selectName);
   const email = useSelector(selectEmail);
-  useEffect(() => {
-    console.log("User:", user);
-    console.log("Email:", email);
-  }, [user, email]);
+  useEffect(() => {}, [user, email]);
 
   return (
     <div className={css.container}>
