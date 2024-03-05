@@ -10,7 +10,7 @@ const userSlice = createSlice({
   name: "User",
   initialState: initialState,
   extraReducers: (builder) => {
-    const pending = (state, actions) => {
+    const pending = (state, action) => {
       state.isLoading = true;
     };
     const rejected = (state, actions) => {
@@ -19,10 +19,9 @@ const userSlice = createSlice({
     };
     builder
       .addCase(userRegister.pending)
-      .addCase(userRegister.fulfilled, (state, actions) => {
-        state.user.name = actions.payload.name;
-        state.user.email = actions.payload.email;
-        state.token = actions.payload.token;
+      .addCase(userRegister.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isAuth = true;
         state.isLoading = false;
       })
