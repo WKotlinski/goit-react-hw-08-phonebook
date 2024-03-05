@@ -3,9 +3,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
+const setAutheader = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const getContacts = createAsyncThunk(
   "contacts/getContacts",
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.user.token;
+    setAutheader(token);
     try {
       const res = await axios.get("/contacts");
       return res.data;
@@ -41,9 +48,6 @@ export const deleteContacts = createAsyncThunk(
     }
   }
 );
-const setAutheader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
 
 export const userRegister = createAsyncThunk(
   "user/register",
