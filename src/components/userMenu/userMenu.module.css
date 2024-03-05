@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: hsl(229, 71%, 21%);
+  border-radius: 20px;
+  color: hsl(0, 0%, 100%);
+  margin-top: 20px;
+}
+
+.container p {
+  margin-bottom: 10px;
+}
+
+.container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: red;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: hsl(0, 0%, 80%);
+}
