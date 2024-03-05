@@ -26,16 +26,16 @@ const Navigation = () => {
         <CustomNavLink to="loging" className={css.navLink}>
           Loging
         </CustomNavLink>
-        {!isAuth ? (
+        {!isAuth && (
           <CustomNavLink to="/register" className={css.navLink}>
             Register
           </CustomNavLink>
-        ) : null}
+        )}
         <CustomNavLink to="/contactapp" className={css.navLink}>
           Aplikacja
         </CustomNavLink>
       </nav>
-      {isAuth ? <UserMenu /> : null}
+      {isAuth && <UserMenu />}
     </header>
   );
 };
