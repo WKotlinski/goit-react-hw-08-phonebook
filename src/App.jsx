@@ -1,24 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import ContactsApp from "./components/contacts/contactsApp";
+import { lazy, Suspense } from "react";
 
 import "./App.css";
 import Navigation from "./components/header/navigation/Navigation";
-import HomePage from "./components/header/homepage/homepage";
-import RegistrationSection from "./components/logingSection/registerSection";
-import LoginSection from "./components/logingSection/login";
+
+const ContactsApp = lazy(() => import("./components/contacts/contactsApp"));
+const HomePage = lazy(() => import("./components/header/homepage/homepage"));
+const RegistrationSection = lazy(() =>
+  import("./components/logingSection/registerSection")
+);
+const LoginSection = lazy(() => import("./components/logingSection/login"));
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="register" element={<RegistrationSection />} />
-          <Route path="/loging" element={<LoginSection />} />
-          <Route path="contactapp" element={<ContactsApp />} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="register" element={<RegistrationSection />} />
+            <Route path="/loging" element={<LoginSection />} />
+            <Route path="contactapp" element={<ContactsApp />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );
