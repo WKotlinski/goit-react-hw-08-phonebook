@@ -23,9 +23,11 @@ const Navigation = () => {
         <CustomNavLink to="/" className={css.navLink}>
           Home
         </CustomNavLink>
-        <CustomNavLink to="loging" className={css.navLink}>
-          Loging
-        </CustomNavLink>
+        {!isAuth && (
+          <CustomNavLink to="loging" className={css.navLink}>
+            Loging
+          </CustomNavLink>
+        )}
         {!isAuth && (
           <CustomNavLink to="/register" className={css.navLink}>
             Register
@@ -35,7 +37,7 @@ const Navigation = () => {
           Aplikacja
         </CustomNavLink>
       </nav>
-      {isAuth && <UserMenu />}
+      <div className={css.userMenu}>{isAuth && <UserMenu />}</div>
     </header>
   );
 };
