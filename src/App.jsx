@@ -33,7 +33,7 @@ function App() {
               element={
                 <PrivateRoute
                   Component={<RegistrationSection />}
-                  redirecTo={"/contactapp"}
+                  redirectTo={"/contactapp"}
                 />
               }
             />
