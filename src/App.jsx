@@ -3,6 +3,11 @@ import { lazy, Suspense } from "react";
 
 import "./App.css";
 import Navigation from "./components/header/navigation/Navigation";
+import PrivateRoute from "./components/routing/privateRoute";
+import ProtectedRoute from "./components/routing/protectedRoute";
+
+// import { useDispatch } from "react-redux";
+// import { userRefresh } from "./redux/operaction";
 
 const ContactsApp = lazy(() => import("./components/contacts/contactsApp"));
 const HomePage = lazy(() => import("./components/header/homepage/homepage"));
@@ -12,6 +17,10 @@ const RegistrationSection = lazy(() =>
 const LoginSection = lazy(() => import("./components/logingSection/login"));
 
 function App() {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(userRefresh());
+  // }, []);
   return (
     <>
       <BrowserRouter>
@@ -19,9 +28,33 @@ function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="register" element={<RegistrationSection />} />
-            <Route path="/loging" element={<LoginSection />} />
-            <Route path="contactapp" element={<ContactsApp />} />
+            <Route
+              path="register"
+              element={
+                <PrivateRoute
+                  Component={<RegistrationSection />}
+                  redirecTo={"/contactapp"}
+                />
+              }
+            />
+            <Route
+              path="/loging"
+              element={
+                <PrivateRoute
+                  Component={<LoginSection />}
+                  redirectTo="/contactapp"
+                />
+              }
+            />
+            <Route
+              path="/contactapp"
+              element={
+                <ProtectedRoute
+                  Component={<ContactsApp />}
+                  redirectTo="/login"
+                />
+              }
+            />
           </Routes>
         </Suspense>
       </BrowserRouter>

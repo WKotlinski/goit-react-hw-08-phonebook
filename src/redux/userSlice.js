@@ -5,6 +5,7 @@ const initialState = {
   token: "",
   isAuth: false,
   isLoading: false,
+  isRefreshing: false,
 };
 const userSlice = createSlice({
   name: "User",
@@ -18,7 +19,7 @@ const userSlice = createSlice({
       state.error = actions.payload;
     };
     builder
-      .addCase(userRegister.pending)
+      .addCase(userRegister.pending, pending)
       .addCase(userRegister.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -48,3 +49,11 @@ const userSlice = createSlice({
 export const { register, login, logout } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
+
+// .addCase(userRefresh.pending, (state, action) => {
+//   state.isRefreshing = true;
+// })
+// .addCase(userRefresh.fulfilled, (state, action) => {
+//   state.isRefreshing = false;
+//   state.user = action.payload.user;
+// })
