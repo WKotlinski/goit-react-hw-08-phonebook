@@ -30,3 +30,6 @@ function App() {
 }
 
 export default App;
+// To-Do
+// Edit contacts
+// Add Material UI
