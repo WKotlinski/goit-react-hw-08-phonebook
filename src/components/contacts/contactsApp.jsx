@@ -61,9 +61,11 @@ const ContactsApp = () => {
       <h2>Contacts</h2>
       <ContactForm onSubmit={addContact} />
       <Filter value={filter} onChange={handleChangeFilter} />
-      {filteredContacts.map((con) => (
-        <Contact key={con.id} contact={con} handleClick={deleteContact} />
-      ))}
+      <ul>
+        {filteredContacts.map((con) => (
+          <Contact key={con.id} contact={con} handleClick={deleteContact} />
+        ))}
+      </ul>
     </div>
   );
 };
